@@ -1,4 +1,4 @@
-let generateMessage = (from, text)=>{
+let generateMessage = function (from, text){
     return {
         from,
         text,
@@ -6,4 +6,4 @@ let generateMessage = (from, text)=>{
     };
 };
 
-module.exports = {generateMessage};
+module.exports = { generateMessage };
