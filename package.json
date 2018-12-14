@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": false,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "mocha utils/**/*.test.js",
+    "test-watch": "nodemon --exec 'npm test'"
   },
   "dependencies": {
     "express": "~4.16.0",
@@ -13,5 +15,10 @@
   "engines": {
     "node": "10.13.0",
     "npm": "6.4.1"
+  },
+  "devDependencies": {
+    "expect": "^23.6.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9"
   }
 }
