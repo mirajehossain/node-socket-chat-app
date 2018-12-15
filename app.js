@@ -3,8 +3,6 @@ const path = require('path');
 const http= require('http');
 const logger = require('morgan');
 const socketIO = require('socket.io');
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const { generateMessage, generateLocationMessage } = require('./utils/message');
 const publicPath = path.join(__dirname, 'public');
 const port = process.env.PORT || 3000;
@@ -16,9 +14,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(publicPath));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 
 io.on('connection',(socket)=>{
