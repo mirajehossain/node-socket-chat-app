@@ -3,18 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="./stylesheets/style.css">
 </head>
-<body>
-    <p>Welcome to chat app</p>
-    <ol id="messages"></ol>
-    <form id="message-form">
-        <input type="text" name="message" placeholder="Message">
-        <button>send</button>
-    </form>
-        <button id="send-location">send location</button>
+<body class="chat">
+<div class="chat__sidebar">
+    <h3>People</h3>
+    <div id="users">
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./lib/jquery.min.js"></script>
-    <script src="./js/index.js"></script>
+    </div>
+</div>
+<div class="chat__main">
+    <ol class="chat__messages" id="messages"></ol>
+    <div class="chat__footer">
+        <form id="message-form">
+            <input type="text" name="message" placeholder="Message" autofocus autocomplete="off">
+            <button>send</button>
+        </form>
+        <button id="send-location">Send location</button>
+
+    </div>
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="./lib/jquery.min.js"></script>
+<script src="./js/index.js"></script>
 </body>
 </html>

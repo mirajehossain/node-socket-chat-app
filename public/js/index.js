@@ -1,5 +1,5 @@
 let socket = io();
-socket.on('connect', function() {
+socket.on('connect', function () {
     console.log("connected to server");
 });
 
@@ -19,35 +19,38 @@ socket.on('newLocationMessage', function (message) {
     jQuery('#messages').append(li);
 });
 
-socket.on('disconnect', function() {
+socket.on('disconnect', function () {
     console.log("disconnected from server")
 });
 
 
-
-jQuery('#message-form').on('submit',function (e) {
+let messageTextBox = jQuery('[name=message]');
+jQuery('#message-form').on('submit', function (e) {
     e.preventDefault();
 
     socket.emit('createMessage', {
         from: 'User',
-        text: jQuery('[name=message]').val()
+        text: messageTextBox.val()
     }, function () {
-
+        messageTextBox.val('');
     })
 });
 
 let locationButton = jQuery('#send-location');
-    locationButton.on('click', function () {
-        if(!navigator.geolocation)
-            return alert('Geolocation is not support in your browser');
+locationButton.on('click', function () {
+    if (!navigator.geolocation)
+        return alert('Geolocation is not support in your browser');
 
-        navigator.geolocation.getCurrentPosition(function (position) {
-            socket.emit('createLocationMessage', {
-                lat: position.coords.latitude,
-                lon: position.coords.longitude
-            })
-        }, function (error) {
-                alert('Unable to fetch location');
-                console.log(error);
+    locationButton.attr('disabled', 'disabled').text('Sending location...');
+    navigator.geolocation.getCurrentPosition(function (position) {
+        locationButton.removeAttr('disabled').text('Send location');
+        socket.emit('createLocationMessage', {
+            lat: position.coords.latitude,
+            lon: position.coords.longitude
         })
-    });
+    }, function (error) {
+        locationButton.removeAttr('disabled').text('Send location');
+        alert('Unable to fetch location');
+        console.log(error);
+    })
+});
